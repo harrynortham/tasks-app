@@ -1,4 +1,4 @@
-import { createProject, getProjects, deleteProject } from "./projects";
+import { createProject, readProjects, deleteProject } from "./projects";
 
 function addProjectForm() {
   const form = document.createElement("form");
@@ -23,7 +23,7 @@ function addProjectForm() {
 }
 
 function projectsList() {
-  const projects = getProjects();
+  const projects = readProjects();
   const list = document.createElement("ul");
   list.classList.add("projects-list");
 

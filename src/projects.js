@@ -30,8 +30,8 @@ function createProject(projectName) {
   localStorage.setItem("projects", JSON.stringify(projects));
 }
 
-function getProjects() {
+function readProjects() {
   return JSON.parse(localStorage.getItem("projects"));
 }
 
-export { createProject, getProjects, deleteProject };
+export { createProject, readProjects, deleteProject };
