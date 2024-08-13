@@ -15,6 +15,9 @@ function newTaskForm(projectID) {
 
     // handle submit
     createTask(projectID, taskName);
+
+    // ADD FUNCTION TO UPDATE TASK LISTS WHEN CREATED
+
     nameInput.value = "";
   });
 
@@ -26,14 +29,21 @@ function newTaskForm(projectID) {
 //create list of tasks and return the list and render it
 function tasksList(projectID) {
   const tasks = readTasks(projectID);
+  const list = document.createElement("ul");
+  list.classList.add("tasks-list");
+
   tasks.forEach((task) => {
+    const listItem = document.createElement("li");
+    listItem.textContent = task.title;
+    list.appendChild(listItem);
     console.log(task);
   });
+  return list;
 }
 
 function renderTasks(projectID) {
   const tasksContainer = document.createElement("div");
-  tasksList(projectID);
+  tasksContainer.appendChild(tasksList(projectID));
   tasksContainer.appendChild(newTaskForm(projectID));
 
   return tasksContainer;
