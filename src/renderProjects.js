@@ -31,16 +31,18 @@ function projectsList() {
   if (projects) {
     projects.forEach((project) => {
       const listItem = document.createElement("li");
+
+      // change to use data attribute instead of ID
       listItem.id = project.id;
+
       const listItemContent = document.createTextNode(project.title);
-      // listItem.appendChild(renderTasks());
 
       const deleteButton = document.createElement("button");
       deleteButton.textContent = "Delete";
 
       deleteButton.addEventListener("click", () => {
-        // remove the element from dom instead of reloading full list
         deleteProject(project.id);
+        // remove the element from dom instead of reloading full list
         removeProject(project.id);
       });
 

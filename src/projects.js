@@ -4,7 +4,7 @@ function project(title) {
   return {
     id: uuidv4(),
     title,
-    todos: [],
+    tasks: [],
   };
 }
 
@@ -17,7 +17,7 @@ function createProject(projectName) {
   projects.push(newProject);
 
   localStorage.setItem("projects", JSON.stringify(projects));
-  console.log("Created project: " + newProject.id);
+  // console.log("Created project: " + newProject.id);
 }
 
 function readProjects() {
