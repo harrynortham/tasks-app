@@ -1,10 +1,27 @@
 import { v4 as uuidv4 } from "uuid";
+
 function project(title) {
   return {
     id: uuidv4(),
     title,
     todos: [],
   };
+}
+
+function createProject(projectName) {
+  if (localStorage.getItem("projects") === null) {
+    localStorage.setItem("projects", JSON.stringify([]));
+  }
+  let projects = JSON.parse(localStorage.getItem("projects"));
+  const newProject = project(projectName);
+  projects.push(newProject);
+
+  localStorage.setItem("projects", JSON.stringify(projects));
+  console.log("Created project: " + newProject.id);
+}
+
+function readProjects() {
+  return JSON.parse(localStorage.getItem("projects"));
 }
 
 function deleteProject(projectID) {
@@ -16,22 +33,6 @@ function deleteProject(projectID) {
 
   //set storage with the updated array of objects
   localStorage.setItem("projects", JSON.stringify(projectsFiltered));
-}
-
-function createProject(projectName) {
-  if (localStorage.getItem("projects") === null) {
-    localStorage.setItem("projects", JSON.stringify([]));
-  }
-  let projects = JSON.parse(localStorage.getItem("projects"));
-  const newProject = project(projectName);
-  console.log(newProject);
-  projects.push(newProject);
-  console.log(projects);
-  localStorage.setItem("projects", JSON.stringify(projects));
-}
-
-function readProjects() {
-  return JSON.parse(localStorage.getItem("projects"));
 }
 
 export { createProject, readProjects, deleteProject };

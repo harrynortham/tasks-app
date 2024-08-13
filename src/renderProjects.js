@@ -1,11 +1,12 @@
 import { createProject, readProjects, deleteProject } from "./projects";
+import { renderTasks } from "./renderTasks.js";
 
 function addProjectForm() {
   const form = document.createElement("form");
   const nameInput = document.createElement("input");
   nameInput.setAttribute("type", "text");
   nameInput.required = true;
-  nameInput.setAttribute("name", "projectname");
+  nameInput.setAttribute("name", "name");
   const button = document.createElement("button");
   button.textContent = "Create project";
 
@@ -16,7 +17,7 @@ function addProjectForm() {
     const projectName = nameInput.value;
     // handle submit
     createProject(projectName);
-    updateProjectsList();
+    refreshProjects();
     nameInput.value = "";
   });
   return form;
@@ -30,14 +31,18 @@ function projectsList() {
   if (projects) {
     projects.forEach((project) => {
       const listItem = document.createElement("li");
+      listItem.id = project.id;
       const listItemContent = document.createTextNode(project.title);
+      // listItem.appendChild(renderTasks());
+      renderTasks(project.id);
+
       const deleteButton = document.createElement("button");
       deleteButton.textContent = "Delete";
 
       deleteButton.addEventListener("click", () => {
-        //delete the project via its UUID and update the list
+        // remove the element from dom instead of reloading full list
         deleteProject(project.id);
-        updateProjectsList();
+        removeProject(project.id);
       });
 
       listItem.appendChild(listItemContent);
@@ -51,13 +56,19 @@ function projectsList() {
   return list;
 }
 
-function updateProjectsList() {
+function removeProject(projectID) {
+  const project = document.getElementById(projectID);
+  project.remove();
+  console.log("Deleted project: " + projectID);
+}
+
+function refreshProjects(projectID) {
   const projectsContainer = document.getElementsByClassName("projects")[0];
   projectsContainer.innerHTML = "";
   projectsContainer.appendChild(projectsList());
 }
 
-export default function renderProjects() {
+function renderProjects() {
   const projectsContainer = document.createElement("div");
   projectsContainer.classList.add("projects-container");
 
@@ -76,3 +87,5 @@ export default function renderProjects() {
   // return node containing our elements
   return projectsContainer;
 }
+
+export { renderProjects };

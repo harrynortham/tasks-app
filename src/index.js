@@ -1,4 +1,4 @@
-import renderProjects from "./renderProjects";
+import { renderProjects } from "./renderProjects";
 
 function init() {
   const container = document.getElementById("container");
