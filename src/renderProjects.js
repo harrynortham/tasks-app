@@ -29,13 +29,17 @@ function projectsList() {
   list.classList.add("projects-list");
 
   if (projects) {
+    projects.reverse();
     projects.forEach((project) => {
       const listItem = document.createElement("li");
 
       // change to use data attribute instead of ID
-      listItem.id = project.id;
+      //listItem.id = project.id;
+      listItem.setAttribute("data-project-id", project.id);
 
-      const listItemContent = document.createTextNode(project.title);
+      const listItemContent = document.createElement("div");
+      listItemContent.classList.add("project-title");
+      listItemContent.appendChild(document.createTextNode(project.title));
 
       const deleteButton = document.createElement("button");
       deleteButton.textContent = "Delete";
@@ -61,9 +65,10 @@ function projectsList() {
 }
 
 function removeProject(projectID) {
-  const project = document.getElementById(projectID);
+  const project = document.querySelectorAll(
+    `[data-project-id="${projectID}"]`
+  )[0];
   project.remove();
-  console.log("Deleted project: " + projectID);
 }
 
 function refreshProjects(projectID) {
@@ -85,8 +90,8 @@ function renderProjects() {
   projects.appendChild(projectsList());
   actions.appendChild(newProjectForm());
 
-  projectsContainer.appendChild(projects);
   projectsContainer.appendChild(actions);
+  projectsContainer.appendChild(projects);
 
   // return node containing our elements
   return projectsContainer;

@@ -34,6 +34,7 @@ function tasksList(projectID) {
 
   tasks.forEach((task) => {
     const listItem = document.createElement("li");
+    listItem.setAttribute("data-task-id", task.id);
     listItem.textContent = task.title;
     list.appendChild(listItem);
     console.log(task);
