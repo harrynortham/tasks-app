@@ -1,6 +1,10 @@
 import { createProject, readProjects, deleteProject } from "./projects";
 import { renderTasks } from "./renderTasks.js";
 
+// add a function or module to show a dialog with the create project/task forms
+
+// we can refactor the code using template literals for the form
+// use reset() method restores a form element's default values
 function newProjectForm() {
   const form = document.createElement("form");
   const nameInput = document.createElement("input");
@@ -8,7 +12,7 @@ function newProjectForm() {
   nameInput.required = true;
   nameInput.setAttribute("name", "name");
   const button = document.createElement("button");
-  button.textContent = "Create project";
+  button.textContent = "Add";
 
   form.appendChild(nameInput);
   form.appendChild(button);
@@ -19,8 +23,37 @@ function newProjectForm() {
     createProject(projectName);
     refreshProjects();
     nameInput.value = "";
+    document.querySelector(".modal").remove();
   });
   return form;
+}
+
+function newProjectModal() {
+  const body = document.body;
+  const modal = document.createElement("div");
+  modal.classList.add("modal");
+  const modalContent = document.createElement("div");
+  modalContent.classList.add("modal-content");
+  const deleteButton = document.createElement("span");
+  deleteButton.classList.add("delete-project", "fa-solid", "fa-xmark", "fa-xl");
+  deleteButton.addEventListener("click", () => {
+    modal.remove();
+  });
+  modalContent.appendChild(deleteButton);
+  modalContent.appendChild(newProjectForm());
+  modal.appendChild(modalContent);
+  body.appendChild(modal);
+}
+
+function newProjectButton() {
+  const button = document.createElement("button");
+  button.textContent = "New Project";
+
+  button.addEventListener("click", () => {
+    newProjectModal();
+  });
+
+  return button;
 }
 
 function projectsList() {
@@ -45,8 +78,8 @@ function projectsList() {
       deleteButton.classList.add(
         "delete-project",
         "fa-solid",
-        "fa-circle-xmark",
-        "fa-lg"
+        "fa-xmark",
+        "fa-xl"
       );
 
       deleteButton.addEventListener("click", () => {
@@ -93,7 +126,9 @@ function renderProjects() {
   actions.classList.add("actions");
 
   projects.appendChild(projectsList());
-  actions.appendChild(newProjectForm());
+
+  actions.appendChild(newProjectButton());
+  // actions.appendChild(newProjectForm());
 
   projectsContainer.appendChild(actions);
   projectsContainer.appendChild(projects);

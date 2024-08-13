@@ -9,15 +9,16 @@ function project(title) {
 }
 
 function createProject(projectName) {
+  // this can be refactored to use logical operator OR
   if (localStorage.getItem("projects") === null) {
     localStorage.setItem("projects", JSON.stringify([]));
   }
   let projects = JSON.parse(localStorage.getItem("projects"));
+
   const newProject = project(projectName);
   projects.push(newProject);
 
   localStorage.setItem("projects", JSON.stringify(projects));
-  // console.log("Created project: " + newProject.id);
 }
 
 function readProjects() {

@@ -36,6 +36,14 @@ header {
   padding: 1rem;
 }
 
+header {
+  font-weight: bold;
+}
+
+footer {
+  text-align: center;
+}
+
 footer,
 header {
   background-color: #111111;
@@ -47,6 +55,7 @@ header {
   padding: 1rem;
   margin-bottom: 1rem;
   border-radius: 10px;
+  text-align: center;
 }
 
 .projects-list {
@@ -65,12 +74,14 @@ header {
 
 .project-title {
   font-weight: bold;
+  font-size: 1.1rem;
 }
 
 .projects-list .delete-project {
   position: absolute;
-  top: 1rem;
+  top: 1.2rem;
   right: 0.4rem;
+  cursor: pointer;
 }
 
 .tasks-list {
@@ -80,6 +91,33 @@ header {
 
 .tasks-list > li {
   border-bottom: 1px solid #ccc;
-  padding: 0.5rem;
+  padding: 1rem 0.5rem;
   text-transform: capitalize;
+}
+
+.modal {
+  position: absolute;
+  width: 100%;
+  height: 100dvh;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.modal-content {
+  background: white;
+  width: 80%;
+  max-width: 30rem;
+  margin: auto;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+@media screen and (min-width: 800px) {
+  .projects-container {
+    max-width: 800px;
+    margin: auto;
+  }
 }

@@ -1,5 +1,7 @@
 import { readTasks, createTask } from "./tasks";
 
+// add a function or module to show a dialog with the create project/task forms
+
 function newTaskForm(projectID) {
   const form = document.createElement("form");
   const nameInput = document.createElement("input");
@@ -7,7 +9,7 @@ function newTaskForm(projectID) {
   nameInput.required = true;
   nameInput.setAttribute("name", "name");
   const button = document.createElement("button");
-  button.textContent = "Create task";
+  button.textContent = "New task";
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -16,7 +18,7 @@ function newTaskForm(projectID) {
     // handle submit
     createTask(projectID, taskName);
 
-    // ADD FUNCTION TO UPDATE TASK LISTS WHEN CREATED
+    // ADD FUNCTION TO UPDATE TASK LISTS VIEW WHEN CREATED
 
     nameInput.value = "";
   });
