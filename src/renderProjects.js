@@ -1,7 +1,7 @@
 import { createProject, readProjects, deleteProject } from "./projects";
 import { renderTasks } from "./renderTasks.js";
 
-function addProjectForm() {
+function newProjectForm() {
   const form = document.createElement("form");
   const nameInput = document.createElement("input");
   nameInput.setAttribute("type", "text");
@@ -34,7 +34,6 @@ function projectsList() {
       listItem.id = project.id;
       const listItemContent = document.createTextNode(project.title);
       // listItem.appendChild(renderTasks());
-      renderTasks(project.id);
 
       const deleteButton = document.createElement("button");
       deleteButton.textContent = "Delete";
@@ -47,6 +46,9 @@ function projectsList() {
 
       listItem.appendChild(listItemContent);
       listItem.appendChild(deleteButton);
+
+      const tasks = renderTasks(project.id);
+      listItem.appendChild(tasks);
 
       list.appendChild(listItem);
     });
@@ -79,7 +81,7 @@ function renderProjects() {
   actions.classList.add("actions");
 
   projects.appendChild(projectsList());
-  actions.appendChild(addProjectForm());
+  actions.appendChild(newProjectForm());
 
   projectsContainer.appendChild(projects);
   projectsContainer.appendChild(actions);
