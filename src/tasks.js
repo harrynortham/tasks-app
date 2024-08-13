@@ -2,6 +2,8 @@ import { v4 as uuidv4 } from "uuid";
 
 //add function to update the tasks list
 
+// add a function or module to show a dialog with the create project/task forms
+
 // task factory function goes here
 function task(title = "", description = "", dueDate, priority) {
   return {

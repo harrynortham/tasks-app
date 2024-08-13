@@ -41,8 +41,13 @@ function projectsList() {
       listItemContent.classList.add("project-title");
       listItemContent.appendChild(document.createTextNode(project.title));
 
-      const deleteButton = document.createElement("button");
-      deleteButton.textContent = "Delete";
+      const deleteButton = document.createElement("span");
+      deleteButton.classList.add(
+        "delete-project",
+        "fa-solid",
+        "fa-circle-xmark",
+        "fa-lg"
+      );
 
       deleteButton.addEventListener("click", () => {
         deleteProject(project.id);

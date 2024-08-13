@@ -35,10 +35,18 @@ footer,
 header {
   padding: 1rem;
 }
+
 footer,
 header {
   background-color: #111111;
   color: white;
+}
+
+.actions {
+  background: rgba(255, 255, 255, 0.5);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 10px;
 }
 
 .projects-list {
@@ -52,8 +60,26 @@ header {
   padding: 1rem;
   border-radius: 10px;
   margin-bottom: 1rem;
+  position: relative;
 }
 
 .project-title {
   font-weight: bold;
+}
+
+.projects-list .delete-project {
+  position: absolute;
+  top: 1rem;
+  right: 0.4rem;
+}
+
+.tasks-list {
+  padding: 0.5rem 0;
+  list-style-type: none;
+}
+
+.tasks-list > li {
+  border-bottom: 1px solid #ccc;
+  padding: 0.5rem;
+  text-transform: capitalize;
 }
