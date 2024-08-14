@@ -97,7 +97,7 @@ header {
 
 .tasks-list > li {
   border-bottom: 1px solid #ccc;
-  padding: 1rem 0.5rem;
+  padding: 1rem 0;
   text-transform: capitalize;
 }
 
@@ -128,6 +128,12 @@ header {
   position: absolute;
   top: 1rem;
   right: 0.5rem;
+}
+
+.new-task-button {
+  background: transparent;
+  padding: 0.5rem 0;
+  color: black;
 }
 
 @media screen and (min-width: 800px) {

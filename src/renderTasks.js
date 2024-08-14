@@ -30,9 +30,10 @@ function newTaskForm(projectID) {
   return form;
 }
 
-function newProjectButton(projectID) {
+function newTaskButton(projectID) {
   const button = document.createElement("button");
-  button.textContent = "New Task";
+  button.classList.add("new-task-button");
+  button.innerHTML = "<i class='fa-solid fa-pen-to-square'></i> New Task";
 
   button.addEventListener("click", () => {
     // open the new project form in a modal
@@ -61,7 +62,7 @@ function tasksList(projectID) {
 function renderTasks(projectID) {
   const tasksContainer = document.createElement("div");
   tasksContainer.appendChild(tasksList(projectID));
-  tasksContainer.appendChild(newProjectButton(projectID));
+  tasksContainer.appendChild(newTaskButton(projectID));
 
   return tasksContainer;
 }

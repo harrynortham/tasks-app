@@ -31,7 +31,7 @@ function newProjectForm() {
 
 function newProjectButton() {
   const button = document.createElement("button");
-  button.textContent = "New Project";
+  button.innerHTML = "<i class='fa-solid fa-list-check'></i> New Project";
 
   button.addEventListener("click", () => {
     // open the new project form in a modal
