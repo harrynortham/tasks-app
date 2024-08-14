@@ -1,5 +1,6 @@
 import { createProject, readProjects, deleteProject } from "./projects";
 import { renderTasks } from "./renderTasks.js";
+import modal from "./renderModal.js";
 
 // add a function or module to show a dialog with the create project/task forms
 
@@ -28,29 +29,13 @@ function newProjectForm() {
   return form;
 }
 
-function newProjectModal() {
-  const body = document.body;
-  const modal = document.createElement("div");
-  modal.classList.add("modal");
-  const modalContent = document.createElement("div");
-  modalContent.classList.add("modal-content");
-  const deleteButton = document.createElement("span");
-  deleteButton.classList.add("delete-project", "fa-solid", "fa-xmark", "fa-xl");
-  deleteButton.addEventListener("click", () => {
-    modal.remove();
-  });
-  modalContent.appendChild(deleteButton);
-  modalContent.appendChild(newProjectForm());
-  modal.appendChild(modalContent);
-  body.appendChild(modal);
-}
-
 function newProjectButton() {
   const button = document.createElement("button");
   button.textContent = "New Project";
 
   button.addEventListener("click", () => {
-    newProjectModal();
+    // open the new project form in a modal
+    modal(newProjectForm()); //expects node element
   });
 
   return button;
