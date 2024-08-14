@@ -1,7 +1,5 @@
 import { readTasks, createTask } from "./tasks";
-import modal from "./renderModal.js";
-
-// add a function or module to show a dialog with the create project/task forms
+import modal from "./renderModal";
 
 function newTaskForm(projectID) {
   const formContainer = document.createElement("div");

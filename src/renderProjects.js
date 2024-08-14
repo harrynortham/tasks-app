@@ -1,10 +1,7 @@
 import { createProject, readProjects, deleteProject } from "./projects";
-import { renderTasks } from "./renderTasks.js";
-import modal from "./renderModal.js";
+import { renderTasks } from "./renderTasks";
+import modal from "./renderModal";
 
-// add a function or module to show a dialog with the create project/task forms
-
-// we can refactor the code using template literals for the form
 // use reset() method restores a form element's default values
 function newProjectForm() {
   const form = document.createElement("form");
@@ -51,8 +48,6 @@ function projectsList() {
     projects.forEach((project) => {
       const listItem = document.createElement("li");
 
-      // change to use data attribute instead of ID
-      //listItem.id = project.id;
       listItem.setAttribute("data-project-id", project.id);
 
       const listItemContent = document.createElement("div");
@@ -113,7 +108,6 @@ function renderProjects() {
   projects.appendChild(projectsList());
 
   actions.appendChild(newProjectButton());
-  // actions.appendChild(newProjectForm());
 
   projectsContainer.appendChild(actions);
   projectsContainer.appendChild(projects);

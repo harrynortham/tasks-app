@@ -19,6 +19,7 @@ function createProject(projectName) {
   projects.push(newProject);
 
   localStorage.setItem("projects", JSON.stringify(projects));
+  return newProject.id;
 }
 
 function readProjects() {
