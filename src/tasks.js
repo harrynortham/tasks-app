@@ -3,8 +3,6 @@ import { format, compareAsc } from "date-fns";
 
 //we will use date-fns package to order tasks by date
 
-//add function to update the tasks list
-
 // task factory function goes here
 function task(title = "", description = "", dueDate, priority) {
   return {

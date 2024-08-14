@@ -75,9 +75,7 @@ function tasksList(projectID) {
 }
 
 function refreshTasks(projectID) {
-  const project = document.querySelectorAll(
-    `[data-project-id="${projectID}"]`
-  )[0];
+  const project = document.querySelector(`[data-project-id="${projectID}"]`);
   const tasks = project.querySelector(".tasks");
   tasks.innerHTML = "";
   tasks.appendChild(tasksList(projectID));

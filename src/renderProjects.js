@@ -83,14 +83,12 @@ function projectsList() {
 }
 
 function removeProject(projectID) {
-  const project = document.querySelectorAll(
-    `[data-project-id="${projectID}"]`
-  )[0];
+  const project = document.querySelector(`[data-project-id="${projectID}"]`);
   project.remove();
 }
 
 function refreshProjects(projectID) {
-  const projectsContainer = document.getElementsByClassName("projects")[0];
+  const projectsContainer = document.querySelector(".projects");
   projectsContainer.innerHTML = "";
   projectsContainer.appendChild(projectsList());
 }
