@@ -5,7 +5,7 @@ export default function modal(content) {
   const modalContent = document.createElement("div");
   modalContent.classList.add("modal-content");
   const deleteButton = document.createElement("span");
-  deleteButton.classList.add("delete-project", "fa-solid", "fa-xmark", "fa-xl");
+  deleteButton.classList.add("modal-close", "fa-solid", "fa-xmark", "fa-xl");
   deleteButton.addEventListener("click", () => {
     modal.remove();
   });
