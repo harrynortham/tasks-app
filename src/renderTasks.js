@@ -4,13 +4,18 @@ import modal from "./renderModal.js";
 // add a function or module to show a dialog with the create project/task forms
 
 function newTaskForm(projectID) {
-  const form = document.createElement("form");
-  const nameInput = document.createElement("input");
-  nameInput.setAttribute("type", "text");
-  nameInput.required = true;
-  nameInput.setAttribute("name", "name");
-  const button = document.createElement("button");
-  button.textContent = "New task";
+  const formContainer = document.createElement("div");
+
+  formContainer.innerHTML = `
+    <form>
+      <h2>New Task</h2>
+      <div><input type="text" name="name" required placeholder="Task name"></div>
+      <button type="submit">New task</button>
+    </form>
+  `;
+
+  const form = formContainer.querySelector("form");
+  const nameInput = form.querySelector("input[name='name']");
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -25,8 +30,6 @@ function newTaskForm(projectID) {
     document.querySelector(".modal").remove();
   });
 
-  form.appendChild(nameInput);
-  form.appendChild(button);
   return form;
 }
 

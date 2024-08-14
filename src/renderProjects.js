@@ -8,15 +8,14 @@ import modal from "./renderModal.js";
 // use reset() method restores a form element's default values
 function newProjectForm() {
   const form = document.createElement("form");
-  const nameInput = document.createElement("input");
-  nameInput.setAttribute("type", "text");
-  nameInput.required = true;
-  nameInput.setAttribute("name", "name");
-  const button = document.createElement("button");
-  button.textContent = "Add";
+  form.innerHTML = `
+    <h2>New Project</h2>
+    <div><input type="text" name="name" required placeholder="Project name" /></div>
+    <button type="submit">Add</button>
+  `;
 
-  form.appendChild(nameInput);
-  form.appendChild(button);
+  const nameInput = form.querySelector('input[name="name"]');
+
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     const projectName = nameInput.value;
@@ -26,6 +25,7 @@ function newProjectForm() {
     nameInput.value = "";
     document.querySelector(".modal").remove();
   });
+
   return form;
 }
 
