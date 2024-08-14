@@ -4,20 +4,26 @@ import { format, compareAsc } from "date-fns";
 //we will use date-fns package to order tasks by date
 
 // task factory function goes here
-function task(title = "", description = "", dueDate, priority) {
+function task(title = "", description = "", dueDate = "", priority = "") {
   return {
     id: uuidv4(),
     title,
     description,
-    // dueDate,
-    // priority,
+    dueDate,
+    priority,
     completed: false,
   };
 }
 
-function createTask(projectID, taskName) {
+function createTask(
+  projectID,
+  taskName,
+  taskDescription,
+  taskDueDate,
+  taskPriority
+) {
   const projects = JSON.parse(localStorage.getItem("projects"));
-  const newTask = task(taskName);
+  const newTask = task(taskName, taskDescription, taskDueDate, taskPriority);
 
   // use array.find() to find the project with the project ID
   const project = projects.find((project) => project.id === projectID);

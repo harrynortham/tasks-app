@@ -11,8 +11,10 @@ function newTaskForm(projectID) {
  <div><textarea type="text" name="description" required placeholder="Description"></textarea></div>
 <div><input type="date" name="duedate" placeholder="Due date"></div>
 <div>
-<select>
-  <option>Priority</option>
+<select name="priority">
+<option value="low">Low</option>
+<option value="medium">Medium</option>
+<option value="high">High</option>
 </select>
 </div>
       <button type="submit">New task</button>
@@ -20,22 +22,26 @@ function newTaskForm(projectID) {
   `;
 
   const form = formContainer.querySelector("form");
-  const nameInput = form.querySelector("input[name='name']");
-  const descriptionInput = form.querySelector("textarea[name='description']");
-  const duedateInput = form.querySelector("input[name='duedate']");
+  const taskName = form.querySelector("input[name='name']");
+  const taskDescription = form.querySelector("textarea[name='description']");
+  const taskDueDate = form.querySelector("input[name='duedate']");
+  const taskPriority = form.querySelector("select[name='priority']");
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    const taskName = nameInput.value;
-    console.log(duedateInput.value);
+
     // handle submit
-    createTask(projectID, taskName);
+    createTask(
+      projectID,
+      taskName.value,
+      taskDescription.value,
+      taskDueDate.value,
+      taskPriority.value
+    );
 
     // ADD FUNCTION TO UPDATE TASK LISTS VIEW WHEN CREATED
     refreshTasks(projectID);
 
-    // user remove() to reset the values
-    nameInput.value = "";
     document.querySelector(".modal").remove();
   });
 
@@ -69,7 +75,6 @@ function tasksList(projectID) {
     listItem.setAttribute("data-task-id", task.id);
     listItem.textContent = task.title;
     list.appendChild(listItem);
-    console.log(task);
   });
   return tasksContainer;
 }
