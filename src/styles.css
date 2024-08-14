@@ -91,7 +91,7 @@ header {
 .projects-list .delete-project {
   position: absolute;
   top: 1.2rem;
-  right: 0.4rem;
+  right: 0.6rem;
   cursor: pointer;
 }
 

@@ -32,6 +32,8 @@ function newTaskForm(projectID) {
     createTask(projectID, taskName);
 
     // ADD FUNCTION TO UPDATE TASK LISTS VIEW WHEN CREATED
+    refreshTasks(projectID);
+
     // user remove() to reset the values
     nameInput.value = "";
     document.querySelector(".modal").remove();
@@ -56,7 +58,10 @@ function newTaskButton(projectID) {
 //create list of tasks and return the list and render it
 function tasksList(projectID) {
   const tasks = readTasks(projectID);
+  const tasksContainer = document.createElement("div");
+  tasksContainer.classList.add("tasks");
   const list = document.createElement("ul");
+  tasksContainer.appendChild(list);
   list.classList.add("tasks-list");
 
   tasks.forEach((task) => {
@@ -66,7 +71,16 @@ function tasksList(projectID) {
     list.appendChild(listItem);
     console.log(task);
   });
-  return list;
+  return tasksContainer;
+}
+
+function refreshTasks(projectID) {
+  const project = document.querySelectorAll(
+    `[data-project-id="${projectID}"]`
+  )[0];
+  const tasks = project.querySelector(".tasks");
+  tasks.innerHTML = "";
+  tasks.appendChild(tasksList(projectID));
 }
 
 function renderTasks(projectID) {
