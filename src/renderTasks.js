@@ -10,7 +10,7 @@ function newTaskForm(projectID) {
       <h2>New Task</h2>
       <div><input type="text" name="name" required placeholder="Task name"></div>
  <div><textarea type="text" name="description" required placeholder="Description"></textarea></div>
-<div><input type="date" name="duedate" placeholder="Due date"></div>
+<div><input type="date" name="duedate" placeholder="Due date" onfocus="(this.type='date')" onblur="(this.type='text')"></div>
 <div>
 <select name="priority">
 <option value="" disabled selected>Priority</option>
