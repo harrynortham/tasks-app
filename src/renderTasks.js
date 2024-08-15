@@ -88,6 +88,7 @@ function refreshTasks(projectID) {
   const tasks = project.querySelector(".tasks");
   tasks.innerHTML = "";
   tasks.appendChild(tasksList(projectID));
+  tasks.appendChild(newTaskButton(projectID));
 }
 
 function renderTasks(projectID) {
