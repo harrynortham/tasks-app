@@ -110,6 +110,47 @@ header {
   border-bottom: 0;
 }
 
+.task {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ccc;
+  padding: 0.5rem 0;
+}
+
+.task div:first-child {
+  flex: 1;
+}
+
+.task > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.task-description {
+  font-weight: bold;
+}
+
+[class*="task-priority"] {
+  width: 20px;
+  height: 8px;
+  display: inline-block;
+  background-color: black;
+  margin-right: 10px;
+}
+
+.task-priority-high {
+  background-color: red;
+}
+
+.task-priority-medium {
+  background-color: orange;
+}
+
+.task-priority-low {
+  background-color: green;
+}
+
 .modal {
   position: absolute;
   width: 100%;

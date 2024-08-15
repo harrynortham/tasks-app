@@ -1,7 +1,4 @@
 import { v4 as uuidv4 } from "uuid";
-import { format, compareAsc } from "date-fns";
-
-//we will use date-fns package to order tasks by date
 
 // task factory function goes here
 function task(title = "", description = "", dueDate = "", priority = "") {

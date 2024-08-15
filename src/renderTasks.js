@@ -1,5 +1,6 @@
 import { readTasks, createTask } from "./tasks";
 import modal from "./renderModal";
+import { format } from "date-fns";
 
 function newTaskForm(projectID) {
   const formContainer = document.createElement("div");
@@ -12,12 +13,13 @@ function newTaskForm(projectID) {
 <div><input type="date" name="duedate" placeholder="Due date"></div>
 <div>
 <select name="priority">
+<option value="" disabled selected>Priority</option>
 <option value="low">Low</option>
 <option value="medium">Medium</option>
 <option value="high">High</option>
 </select>
 </div>
-      <button type="submit">New task</button>
+      <button type="submit">Add</button>
     </form>
   `;
 
@@ -64,19 +66,21 @@ function newTaskButton(projectID) {
 //create list of tasks and return the list and render it
 function tasksList(projectID) {
   const tasks = readTasks(projectID);
-  const tasksContainer = document.createElement("div");
-  tasksContainer.classList.add("tasks");
-  const list = document.createElement("ul");
-  tasksContainer.appendChild(list);
-  list.classList.add("tasks-list");
+
+  const tasksList = document.createElement("div");
+  tasksList.classList.add("tasks-list");
 
   tasks.forEach((task) => {
-    const listItem = document.createElement("li");
-    listItem.setAttribute("data-task-id", task.id);
-    listItem.textContent = task.title;
-    list.appendChild(listItem);
+    const taskItem = document.createElement("div");
+    taskItem.classList.add("task");
+    taskItem.setAttribute("data-task-id", task.id);
+    const taskDueDate = format(new Date(task.dueDate), "Mo MMM");
+    taskItem.innerHTML = `<div><div class="task-description">${task.title}</div><div><span class="task-priority-${task.priority}"></span><span>${taskDueDate}</span></div></div><div><div><button class="view-task"><i class="fa-regular fa-eye"></i></button> <button class="delete-task"><i class="fa-solid fa-xmark"></button></i></div>
+</div>`;
+
+    tasksList.appendChild(taskItem);
   });
-  return tasksContainer;
+  return tasksList;
 }
 
 function refreshTasks(projectID) {
@@ -87,11 +91,12 @@ function refreshTasks(projectID) {
 }
 
 function renderTasks(projectID) {
-  const tasksContainer = document.createElement("div");
-  tasksContainer.appendChild(tasksList(projectID));
-  tasksContainer.appendChild(newTaskButton(projectID));
+  const tasks = document.createElement("div");
+  tasks.classList.add("tasks");
+  tasks.appendChild(tasksList(projectID));
+  tasks.appendChild(newTaskButton(projectID));
 
-  return tasksContainer;
+  return tasks;
 }
 
 export { renderTasks };
