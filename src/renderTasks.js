@@ -1,4 +1,4 @@
-import { readTasks, createTask, deleteTask } from "./tasks";
+import { readTasks, createTask, deleteTask, readTask } from "./tasks";
 import modal from "./renderModal";
 import { format } from "date-fns";
 
@@ -64,19 +64,18 @@ function newTaskButton(projectID) {
 }
 
 function viewTask(projectID, taskID) {
-  //run function to view task
-  console.log("view " + taskID);
-  //create a function in tasks.js to return a task giving it projectID and taskID
+  //create a function in tasks.js to return a task
+  const task = readTask(projectID, taskID);
 
   // create the element with the task data
-  const task = document.createElement("div");
-  task.classList.add("view-task");
-  task.textContent = "My task";
+  const taskEl = document.createElement("div");
+  taskEl.classList.add("view-task");
+  taskEl.innerHTML = `<h4>${task.title}</h4>`;
 
   //add a edit task button to the element
 
   //open the element in our modal function
-  modal(task);
+  modal(taskEl);
 }
 
 function removeTask(taskID) {

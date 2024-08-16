@@ -45,6 +45,19 @@ function readTasks(projectID) {
   return tasks;
 }
 
+function readTask(projectID, taskID) {
+  const projects = JSON.parse(localStorage.getItem("projects"));
+
+  // Find the project with the matching projectID
+  const project = projects.find((project) => project.id === projectID);
+  if (!project) return null; // Return null if no matching project is found
+
+  // Find the task with the matching taskID within the selected project
+  const task = project.tasks.find((task) => task.id === taskID);
+
+  return task || null; // Return the task if found, otherwise return null
+}
+
 function deleteTask(projectID, taskID) {
   //get the project based on the project ID
 
@@ -54,4 +67,4 @@ function deleteTask(projectID, taskID) {
   console.log("delete task from local storage");
 }
 
-export { readTasks, createTask, deleteTask };
+export { readTasks, createTask, deleteTask, readTask };
