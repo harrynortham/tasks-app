@@ -45,4 +45,13 @@ function readTasks(projectID) {
   return tasks;
 }
 
-export { readTasks, createTask };
+function deleteTask(projectID, taskID) {
+  //get the project based on the project ID
+
+  //find the task with the task ID
+
+  //filter and push again the object without this task
+  console.log("delete task from local storage");
+}
+
+export { readTasks, createTask, deleteTask };

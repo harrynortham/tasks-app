@@ -1,4 +1,4 @@
-import { readTasks, createTask } from "./tasks";
+import { readTasks, createTask, deleteTask } from "./tasks";
 import modal from "./renderModal";
 import { format } from "date-fns";
 
@@ -9,16 +9,16 @@ function newTaskForm(projectID) {
     <form>
       <h2>New Task</h2>
       <div><input type="text" name="name" required placeholder="Task name"></div>
- <div><textarea type="text" name="description" required placeholder="Description"></textarea></div>
-<div><input type="date" name="duedate" placeholder="Due date" onfocus="(this.type='date')" onblur="(this.type='text')"></div>
-<div>
-<select name="priority">
-<option value="" disabled selected>Priority</option>
-<option value="low">Low</option>
-<option value="medium">Medium</option>
-<option value="high">High</option>
-</select>
-</div>
+      <div><textarea type="text" name="description" required placeholder="Description"></textarea></div>
+      <div><input type="date" name="duedate" placeholder="Due date" onfocus="(this.type='date')" onblur="(this.type='text')"></div>
+      <div>
+      <select name="priority">
+      <option value="" disabled selected>Priority</option>
+      <option value="low">Low</option>
+      <option value="medium">Medium</option>
+      <option value="high">High</option>
+      </select>
+      </div>
       <button type="submit">Add</button>
     </form>
   `;
@@ -63,6 +63,28 @@ function newTaskButton(projectID) {
   return button;
 }
 
+function viewTask(projectID, taskID) {
+  //run function to view task
+  console.log("view " + taskID);
+  //create a function in tasks.js to return a task giving it projectID and taskID
+
+  // create the element with the task data
+  const task = document.createElement("div");
+  task.classList.add("view-task");
+  task.textContent = "My task";
+
+  //add a edit task button to the element
+
+  //open the element in our modal function
+  modal(task);
+}
+
+function removeTask(taskID) {
+  //run function to remove task from DOM
+  const task = document.querySelector(`[data-task-id="${taskID}"]`);
+  task.remove();
+}
+
 //create list of tasks and return the list and render it
 function tasksList(projectID) {
   const tasks = readTasks(projectID);
@@ -77,6 +99,18 @@ function tasksList(projectID) {
     const taskDueDate = format(new Date(task.dueDate), "Mo MMM");
     taskItem.innerHTML = `<div><div class="task-description">${task.title}</div><div><span class="task-priority-${task.priority}"></span><span>${taskDueDate}</span></div></div><div><div><button class="view-task"><i class="fa-regular fa-eye"></i></button> <button class="delete-task"><i class="fa-solid fa-xmark"></button></i></div>
 </div>`;
+
+    const viewTaskButton = taskItem.querySelector(".view-task");
+    const deleteTaskButton = taskItem.querySelector(".delete-task");
+
+    viewTaskButton.addEventListener("click", () => {
+      viewTask(projectID, task.id);
+    });
+
+    deleteTaskButton.addEventListener("click", () => {
+      deleteTask(projectID, task.id);
+      removeTask(task.id);
+    });
 
     tasksList.appendChild(taskItem);
   });
