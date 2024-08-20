@@ -63,19 +63,57 @@ function newTaskButton(projectID) {
   return button;
 }
 
-function viewTask(projectID, taskID) {
+function editTask(taskID) {
+  const taskEdit = document.createElement("div");
+  taskEdit.classList.add("edit-task");
+
+  const formContainer = document.createElement("div");
+
+  formContainer.innerHTML = `
+    <form>
+      <h2>Edit Task</h2>
+      <div><input type="text" name="name" required placeholder="Task name"></div>
+      <div><textarea type="text" name="description" required placeholder="Description"></textarea></div>
+      <div><input type="date" name="duedate" placeholder="Due date" onfocus="(this.type='date')" onblur="(this.type='text')"></div>
+      <div>
+      <select name="priority">
+      <option value="" disabled selected>Priority</option>
+      <option value="low">Low</option>
+      <option value="medium">Medium</option>
+      <option value="high">High</option>
+      </select>
+      </div>
+      <button type="submit">Update</button>
+    </form>
+  `;
+
+  taskEdit.appendChild(formContainer);
+
+  //close old modal
+  document.querySelector(".modal").remove();
+  //open edit form
+  modal(taskEdit);
+}
+
+function viewTask(taskID) {
   //create a function in tasks.js to return a task
-  const task = readTask(projectID, taskID);
+  const task = readTask(taskID);
 
   // create the element with the task data
-  const taskEl = document.createElement("div");
-  taskEl.classList.add("view-task");
-  taskEl.innerHTML = `<h4>${task.title}</h4>`;
+  const taskView = document.createElement("div");
+  taskView.classList.add("view-task");
+  taskView.innerHTML = `<h2>${task.title}</h2><div>${task.description}</div><div>${task.dueDate}</div><div>${task.priority} priority</div><div></div>`;
 
   //add a edit task button to the element
-
+  const editTaskButton = document.createElement("button");
+  editTaskButton.classList.add("edit-task");
+  editTaskButton.textContent = "Edit Task";
+  taskView.appendChild(editTaskButton);
+  editTaskButton.addEventListener("click", () => {
+    editTask(taskID);
+  });
   //open the element in our modal function
-  modal(taskEl);
+  modal(taskView);
 }
 
 function removeTask(taskID) {
@@ -103,11 +141,11 @@ function tasksList(projectID) {
     const deleteTaskButton = taskItem.querySelector(".delete-task");
 
     viewTaskButton.addEventListener("click", () => {
-      viewTask(projectID, task.id);
+      viewTask(task.id);
     });
 
     deleteTaskButton.addEventListener("click", () => {
-      deleteTask(projectID, task.id);
+      deleteTask(task.id);
       removeTask(task.id);
     });
 

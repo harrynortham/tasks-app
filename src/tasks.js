@@ -45,26 +45,35 @@ function readTasks(projectID) {
   return tasks;
 }
 
-function readTask(projectID, taskID) {
+function readTask(taskID) {
   const projects = JSON.parse(localStorage.getItem("projects"));
 
-  // Find the project with the matching projectID
-  const project = projects.find((project) => project.id === projectID);
-  if (!project) return null; // Return null if no matching project is found
+  // Iterate through all projects to find the task with the matching taskID
+  for (const project of projects) {
+    const task = project.tasks.find((task) => task.id === taskID);
+    if (task) {
+      return task; // Return the task if found
+    }
+  }
 
-  // Find the task with the matching taskID within the selected project
-  const task = project.tasks.find((task) => task.id === taskID);
-
-  return task || null; // Return the task if found, otherwise return null
+  return null; // Return null if no task with the matching taskID is found in any project
 }
 
-function deleteTask(projectID, taskID) {
+function deleteTask(taskID) {
   //get the project based on the project ID
+  let projects = JSON.parse(localStorage.getItem("projects"));
 
-  //find the task with the task ID
+  // Loop through each project
+  projects = projects.map((project) => {
+    return {
+      // spread operator returns all other properties in the project object
+      ...project,
+      // we then filter the tasks removing the tasks we dont want
+      tasks: project.tasks.filter((task) => task.id !== taskID),
+    };
+  });
 
-  //filter and push again the object without this task
-  console.log("delete task from local storage");
+  localStorage.setItem("projects", JSON.stringify(projects));
 }
 
 export { readTasks, createTask, deleteTask, readTask };
